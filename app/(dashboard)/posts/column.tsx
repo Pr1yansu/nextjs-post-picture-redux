@@ -4,7 +4,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useAppDispatch } from "@/lib/hooks";
 import { dislikeItem, likeItem } from "@/lib/functions/like";
 import { Button } from "@/components/ui/button";
-import { toast } from "react-hot-toast";
 
 export type post = {
   body: string;
@@ -20,12 +19,7 @@ const Like = ({ row }: { row: post }) => {
       variant={"ghost"}
       size={"sm"}
       onClick={() => {
-        try {
-          dispatch(likeItem(row));
-          toast.success("Liked");
-        } catch (error) {
-          toast.error("not found");
-        }
+        dispatch(likeItem(row));
       }}
     >
       Like
@@ -40,12 +34,7 @@ const Dislike = ({ row }: { row: post }) => {
       variant={"ghost"}
       size={"sm"}
       onClick={() => {
-        try {
-          dispatch(dislikeItem(row));
-          toast.success("Disliked");
-        } catch (error) {
-          toast.error("not found");
-        }
+        dispatch(dislikeItem(row));
       }}
     >
       Dislike

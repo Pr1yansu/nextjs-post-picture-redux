@@ -21,8 +21,7 @@ const SaveButton = ({ row }: { row: Photos }) => {
   return (
     <button
       onClick={() => {
-        const ref = dispatch(saveItem(row));
-        console.log(ref);
+        dispatch(saveItem(row));
       }}
     >
       Save
@@ -35,12 +34,7 @@ const UnsaveButton = ({ row }: { row: Photos }) => {
   return (
     <button
       onClick={() => {
-        try {
-          dispatch(unsaveItem(row));
-          toast.success("Unsaved");
-        } catch (error) {
-          toast.error("not found");
-        }
+        dispatch(unsaveItem(row));
       }}
     >
       Unsave

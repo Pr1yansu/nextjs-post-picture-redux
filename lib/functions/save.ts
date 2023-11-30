@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 interface Item {
   id: number;
@@ -13,9 +14,19 @@ const savedItemsSlice = createSlice({
   initialState: [] as Item[],
   reducers: {
     saveItem: (state, action: PayloadAction<Item>) => {
+      if (state.some((item) => item.id === action.payload.id)) {
+        toast.error("Already saved");
+        return;
+      }
       state.push(action.payload);
+      toast.success("Saved");
     },
     unsaveItem: (state, action: PayloadAction<Item>) => {
+      if (!state.some((item) => item.id === action.payload.id)) {
+        toast.error("Not found");
+        return state;
+      }
+      toast.success("Unsaved");
       return state.filter((item) => item.id !== action.payload.id);
     },
   },
